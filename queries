@@ -1,0 +1,132 @@
+CREATE TABLE owners (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    owner TEXT NOT NULL
+);
+DROP TABLE owners;
+
+ 
+
+CREATE TABLE exhibits(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    name TEXT NOT NULL,
+    owner TEXT NOT NULL,
+    status TEXT NOT NULL,
+    execution_order_name TEXT
+);
+DROP TABLE exhibits;
+
+SELECT * FROM exhibits;
+
+CREATE TABLE exhibitions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    exhibition_name TEXT NOT NULL,
+    exhibition_description TEXT NOT NULL
+);
+DROP TABLE exhibitions
+INSERT INTO exhibitions (exhibition_name, exhibition_description) VALUES
+    ('История Аляски', 'От части Российской Империи до штата США. \nКак сложилась история Аляски, её коренное население, \nпочему её продали и многое другое \nна этой увлекательной выставке!'),
+    ('Многообразие калиток', 'Как качество калитки зависит от типа дерева? \nПочему калитку стоить закрывать? \nКакой тип замка лучше выбрать и как выбрать калитку правильно?nНа выставке вы узнаете это и многое другое!');
+DROP TABLE exhibitions;
+DELETE FROM exhibitions;
+SELECT * FROM exhibitions;
+
+
+CREATE TABLE places(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    place_name TEXT NOT NULL
+);
+SELECT * FROM places;
+DROP TABLE places;
+
+CREATE TABLE execution_order(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    name TEXT NOT NULL,
+    date_registration TEXT NOT NULL,
+    exhibition TEXT NOT NULL,
+    date_execution TEXT NOT NULL,
+    place TEXT NOT NULL
+);
+
+SELECT * FROM execution_order;
+DROP TABLE execution_order;
+DELETE FROM execution_order WHERE id = 2;
+
+CREATE TABLE exhibits_entrance(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    entrance_date TEXT NOT NULL,
+    execution_order_name TEXT NOT NULL
+);
+DROP TABLE exhibits_entrance;
+SELECT * FROM exhibits_entrance;
+SELECT exhibition FROM execution_order WHERE name = 'Приказ о проведении "Многообразие калиток"';
+
+CREATE TABLE transfer_exhibits(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    transfer_date TEXT NOT NULL,
+    execution_order_name TEXT NOT NULL
+);
+DROP TABLE transfer_exhibits;
+SELECT * FROM transfer_exhibits;
+
+CREATE TABLE return_exhibits(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    return_date TEXT NOT NULL,
+    execution_order_name TEXT NOT NULL
+);
+DROP TABLE return_exhibits;
+SELECT * FROM return_exhibits;
+
+
+INSERT INTO owners (owner) VALUES 
+    ('ООО "Stark Industries"'),
+    ('ИП "Pony Express"'),
+    ('Корпорация "Monsters Inc."'),
+    ('ЮЛ "Райан Гослинг"'),
+    ('АО "Мамкин бизнесмен"'),
+    ('ЮЛ "О Иль нам"'),
+    ('ООО "Предприятие 3826"');
+    
+INSERT INTO places (place_name) VALUES 
+    ('ВДНХ'),
+    ('Дом культуры "ГЭС-2"'),
+    ('Арт-центр "Гараж"');
+INSERT INTO exhibits (name, owner, status, execution_order_name) VALUES 
+    ('Mark VI', 'ООО "Stark Industries"', 'Доступно', 'Технологическая выставка'),
+    ('Дверь', '"Корпорация "Monsters Inc."', 'Доступно', 'Выставка киноманов'),
+    ('Жидкость для полоскания рта', 'ИП "Pony Express"', 'Доступно', ' '),
+    ('Золотой кальмар', 'ЮЛ "О Иль Нам"', 'Доступно', 'Выставка киноманов'),
+    ('Зубочистка', 'ЮЛ "Райан Гослинг"', 'Доступно', 'Выставка киноманов'),
+    ('Инженер "РАФ-9"', 'ООО "Предприятие 3826"', 'Доступно', 'Технологическая выставка'),
+    ('Макет ракеты "Иерихон"', 'ООО "Stark Industries"', 'Доступно', 'Технологическая выставка'),
+    ('Банан на доске', 'АО "Мамкин бизнесмен"', 'Доступно', ' ');
+    
+INSERT INTO execution_order (name, date_registration, exhibition, date_execution, place) VALUES
+    ('Приказ о проведении "Выставка киноманов"', '10.01.2025 15:40', 'Выставка киноманов', '26.02.25 10:00', 'ВДНХ'),
+    ('Приказ о проведении "Технологическая выставка"', '25.12.2024 13:14', 'Технологическая выставка', '14.01.25 16:18', 'Дом культуры "ГЭС-2"');
+    
+INSERT INTO exhibits_entrance (entrance_date, execution_order_name) VALUES 
+    ('29.01.25 8:00', 'Приказ о проведении "Выставка киноманов"'),
+    ('05.01.25 6:00', 'Приказ о проведении "Технологическая выставка"');
+    
+INSERT INTO transfer_exhibits (transfer_date, execution_order_name) VALUES
+    ('16.02.2025 18:00', 'Приказ о проведении "Выставка киноманов"'),
+    ('08.01.2025 20:00', 'Приказ о проведении "Технологическая выставка"');
+    
+INSERT INTO return_exhibits (return_date, execution_order_name) VALUES
+    ('01.03.2025 10:00', 'Приказ о проведении "Выставка киноманов"'),
+    ('20.01.2025 15:00', 'Приказ о проведении "Технологическая выставка"');
+    
+
+DELETE FROM owners;
+DELETE FROM exhibits;
+DELETE FROM execution_order;
+DELETE FROM exhibits_entrance;
+DELETE FROM transfer_exhibits;
+DELETE FROM return_exhibits;
+
+  
+
+
+           
+
+    
